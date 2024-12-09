@@ -2,7 +2,7 @@
 
 namespace Yaba
 {
-    public class WhiskyEntity
+    public class Whisky
     {
         public string Id { get; set; }
 
@@ -16,6 +16,8 @@ namespace Yaba
 
         public int Age { get; set; }
 
+        public string CaskType { get; set; }
+
         public float Strength { get; set; }
 
         public int Size { get; set; }
@@ -25,6 +27,5 @@ namespace Yaba
         public bool ChillFiltered { get; set; }
 
         public DateTimeOffset Created { get; set; }
-
     }
 }

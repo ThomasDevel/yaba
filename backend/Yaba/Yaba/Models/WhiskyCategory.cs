@@ -6,6 +6,7 @@
         
         SingleMalt,
         Blended,
-        BlendedMalt
+        BlendedMalt,
+        Other
     }
 }
