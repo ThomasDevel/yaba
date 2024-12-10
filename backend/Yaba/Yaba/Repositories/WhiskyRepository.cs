@@ -15,7 +15,7 @@ namespace Yaba.Repositories
         {
             SQLiteCommand command;
             command = _connection.CreateCommand();
-            command.CommandText = "INSERT INTO whiskies (Col1, Col2) VALUES('Test Text ', 1); ";
+            command.CommandText = "INSERT INTO Whiskies (Col1, Col2) VALUES('Test Text ', 1); ";
             var result = command.ExecuteNonQuery();
 
             return result > 0;

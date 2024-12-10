@@ -20,11 +20,11 @@ namespace Yaba
 
         public float Strength { get; set; }
 
-        public int Size { get; set; }
+        public int SizeInCl { get; set; }
 
         public bool NaturalColor { get; set; }
 
-        public bool ChillFiltered { get; set; }
+        public bool NonChillFiltered { get; set; }
 
         public DateTimeOffset Created { get; set; }
     }
