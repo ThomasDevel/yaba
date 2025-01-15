@@ -2,6 +2,9 @@
 
 namespace Yaba
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WhiskyEntity
     {
         public string Id { get; set; }
