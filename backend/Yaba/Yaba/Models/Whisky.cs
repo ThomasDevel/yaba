@@ -17,7 +17,7 @@ namespace Yaba
 
         public bool NaturalColor { get; set; }
 
-        public bool ChillFiltered { get; set; }
+        public bool NonChillFiltered { get; set; }
 
         public DateTimeOffset Created { get; set; }
     }
