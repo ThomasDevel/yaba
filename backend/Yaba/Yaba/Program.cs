@@ -3,6 +3,21 @@ using System.Data.SQLite;
 
 namespace Yaba
 {
+    /// <summary>
+    /// SQL decisions:
+    /// - Single Table Inheritance (aka Table Per Hierarchy Inheritance)
+    /// - Concrete Table Inheritance
+    /// - Class Table Inheritance (aka Table Per Type Inheritance) <--
+    /// 
+    /// The names of these three models come from Martin Fowler's book Patterns of Enterprise Application Architecture.
+    /// 
+    /// Let's take the Class Table Inheritance
+    /// - Base Spirits table with Id, ImageBlob, Alcohol Percentage, Year Etc.. all shared information
+    /// - Dedicated Whisky, Rum, Cognac, Armagnac, Brandy.
+    ///   Mandatory attributes can be enforced with NOT NULL
+    ///   No need for the type attribute.
+    ///   Join SPIRIT on ID
+    /// </summary>
     class Program
     {
 

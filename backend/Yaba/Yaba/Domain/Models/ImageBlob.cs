@@ -1,4 +1,4 @@
-﻿namespace Yaba.Models
+﻿namespace Yaba.Domain.Models
 {
     public class ImageBlob
     {

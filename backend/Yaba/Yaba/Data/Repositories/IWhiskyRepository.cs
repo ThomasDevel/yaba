@@ -1,4 +1,6 @@
-﻿namespace Yaba.Repositories
+﻿using Yaba.Domain.Models;
+
+namespace Yaba.Data.Repositories
 {
     public interface IWhiskyRepository
     {

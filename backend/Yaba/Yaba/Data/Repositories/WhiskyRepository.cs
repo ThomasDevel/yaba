@@ -1,6 +1,7 @@
 ﻿using System.Data.SQLite;
+using Yaba.Domain.Models;
 
-namespace Yaba.Repositories
+namespace Yaba.Data.Repositories
 {
     public class WhiskyRepository : IWhiskyRepository
     {
