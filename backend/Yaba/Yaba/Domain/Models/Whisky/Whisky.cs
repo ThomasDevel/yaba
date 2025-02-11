@@ -1,13 +1,10 @@
 ﻿using System;
+using Yaba.Models;
 
 namespace Yaba.Domain.Models
 {
-    public class Whisky
+    public class Whisky : Beverage
     {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
-
         public WhiskyCategory Category { get; set; }
 
         public string Distillery { get; set; }
@@ -17,10 +14,6 @@ namespace Yaba.Domain.Models
         public int Age { get; set; }
 
         public string CaskType { get; set; }
-
-        public float Strength { get; set; }
-
-        public int SizeInCl { get; set; }
 
         public bool NaturalColor { get; set; }
 

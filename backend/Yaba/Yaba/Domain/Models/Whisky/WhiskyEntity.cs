@@ -2,6 +2,9 @@
 
 namespace Yaba.Domain.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WhiskyEntity
     {
         public string Id { get; set; }
