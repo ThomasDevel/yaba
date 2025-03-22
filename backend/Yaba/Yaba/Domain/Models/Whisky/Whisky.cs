@@ -1,5 +1,4 @@
 ﻿using System;
-using Yaba.Models;
 
 namespace Yaba.Domain.Models
 {
@@ -15,10 +14,10 @@ namespace Yaba.Domain.Models
 
         public string CaskType { get; set; }
 
+        public string BottlingSeries { get; set; }
+
         public bool NaturalColor { get; set; }
 
         public bool NonChillFiltered { get; set; }
-
-        public DateTimeOffset Created { get; set; }
     }
 }

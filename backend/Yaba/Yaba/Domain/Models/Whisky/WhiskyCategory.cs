@@ -7,6 +7,8 @@
         SingleMalt,
         Blended,
         BlendedMalt,
+        Rye,
+        Bourbon,
         Other
     }
 }
