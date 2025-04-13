@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
 using Yaba.Domain.Models;
+using Yaba.Models;
 
 namespace Yaba.Data.Repositories.Sqlite
 {
@@ -14,18 +15,38 @@ namespace Yaba.Data.Repositories.Sqlite
             _connection = sqliteConnection;
         }
 
-        public bool CreateEntry(Whisky whisky, SQLiteTransaction transaction)
+        public WhiskyCategory Category { get; set; }
+
+        public string Distillery { get; set; }
+
+        public int Bottled { get; set; }
+
+        public int Age { get; set; }
+
+        public string CaskType { get; set; }
+
+        public string BottlingSeries { get; set; }
+
+        public bool? NaturalColor { get; set; }
+
+        public bool? NonChillFiltered { get; set; }
+
+        public bool CreateEntry(Whisky whisky)
         {
             try
             {
-                var command = new SQLiteCommand("INSERT INTO cars(name, price) VALUES(@name, @price)", _connection, transaction);
-                //command = _connection.CreateCommand();
-                //command.CommandText = "INSERT INTO Whiskies (Col1, Col2) VALUES('Test Text ', 1); ";
-                //command.CommandText = "INSERT INTO cars(name, price) VALUES(@name, @price)";
+                var command = new SQLiteCommand("INSERT INTO whisky(id, type, name, strength, size, created, category, distillery, bottled, age, caskType, bottlingSeries, naturalColor, nonChillFiltered) " +
+                    "VALUES(@id, @type, @name, @strength, @size, @created, @category, @distillery, @bottled, @age, @caskType, @bottlingSeries, @naturalColor, @nonChillFiltered)", _connection);
 
-                //command.Parameters.AddWithValue("@name", "BMW");
-                //command.Parameters.AddWithValue("@price", 36600);
-                //command.Prepare();
+                var data = whisky.ToEntity();
+                command.Parameters.AddWithValue("@id", data.Id);
+                command.Parameters.AddWithValue("@type", data.Type);
+                command.Parameters.AddWithValue("@name", data.Name);
+                command.Parameters.AddWithValue("@strength", data.Strength);
+                command.Parameters.AddWithValue("@size", data.Size);
+                command.Parameters.AddWithValue("@created", data.Created);
+                command.Prepare();
+
                 command.ExecuteNonQuery();
 
                 return true;

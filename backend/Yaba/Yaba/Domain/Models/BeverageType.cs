@@ -1,6 +1,6 @@
 ﻿namespace Yaba.Domain.Models
 {
-    public enum BeverageClass
+    public enum BeverageType
     {
         Unknown,
 

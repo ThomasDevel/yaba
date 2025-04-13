@@ -1,13 +1,15 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Yaba.Domain.Models;
 
 namespace Yaba.Data.Entities
 {
     public class BeverageEntity
     {
+        [Required]
         public string Id { get; set; }
 
-        public BeverageClass Class { get; set; }
+        public BeverageClass Class { get; }
 
         public string Name { get; set; }
 
@@ -16,6 +18,12 @@ namespace Yaba.Data.Entities
         public int Size { get; set; }
 
         public DateTimeOffset Created { get; set; }
+
+        // Should not be on entity
+        public string Thumbnail { get; set; }
+
+        // Should not be on entity
+        public string[] Images { get; set; }
 
         public static BeverageEntity ToEntity(Beverage beverage)
         {

@@ -5,11 +5,23 @@ namespace Yaba
 {
     /// <summary>
     /// SQL decisions:
-    /// - Single Table Inheritance (aka Table Per Hierarchy Inheritance)
-    /// - Concrete Table Inheritance
-    /// - Class Table Inheritance (aka Table Per Type Inheritance) <--
-    /// 
+    /// - Single Table Inheritance (aka Table Per Hierarchy Inheritance) 
+    ///   -> results in many "null" columns, don't like it at all.
+    ///   -> specific whisky properties should not be mixed with rum, cognac etc..
+    ///   -> does provide the easiest way to query stuff since it is all one big table
+    /// - Concrete Table Inheritance (aka Table Per Concrete Inheritance)
+    /// - Class Table Inheritance (aka Table Per Type Inheritance)
+    ///   -> have a common base table with shared properties ("id", "name" etc.)
+    ///   -> and dedicated tables for derived types.
+    ///   -> Good at first sight but very difficult to sync the common and derived tables..
+    ///   -> if one call fails, database state is out of sync and in an unknown state.. don't like it.
+    ///   
     /// The names of these three models come from Martin Fowler's book Patterns of Enterprise Application Architecture.
+    ///   
+    /// - SQLite supports CRUD and querying JSON with a json1/jsonb extension but this doesn't seem to work out of the box (or at all..?)
+    ///   in .NET without spending some serious time to fix it. This would have been my preferred solution, since we could
+    ///   have used SQLite in a NoSQL mode.
+    /// 
     /// 
     /// Let's take the Class Table Inheritance
     /// - Base Spirits table with Id, ImageBlob, Alcohol Percentage, Year Etc.. all shared information
@@ -17,6 +29,10 @@ namespace Yaba
     ///   Mandatory attributes can be enforced with NOT NULL
     ///   No need for the type attribute.
     ///   Join SPIRIT on ID
+    ///   !! BUT we need seperate calls to create and delete items since their data is shared over 2 tables..
+    ///   In practice this eliminates my need for absolute simplicity.
+    ///   
+    /// To make things as simple as possible, for this implemenation, going the concrete table route seems the easiest.
     /// </summary>
     class Program
     {

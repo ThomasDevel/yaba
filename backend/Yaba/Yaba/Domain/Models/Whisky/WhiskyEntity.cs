@@ -9,6 +9,8 @@ namespace Yaba.Domain.Models
     {
         public string Id { get; set; }
 
+        public BeverageType Type => Whisky.Type;
+
         public string Name { get; set; }
 
         public WhiskyCategory Category { get; set; }
@@ -23,9 +25,9 @@ namespace Yaba.Domain.Models
 
         public int Size { get; set; }
 
-        public bool NaturalColor { get; set; }
+        public bool? NaturalColor { get; set; }
 
-        public bool ChillFiltered { get; set; }
+        public bool? ChillFiltered { get; set; }
 
         public DateTimeOffset Created { get; set; }
 
