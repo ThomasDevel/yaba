@@ -1,16 +1,15 @@
-﻿using System.Data.SQLite;
-using Yaba.Domain.Models;
+﻿using Yaba.Domain.Models;
 
 namespace Yaba.Data.Repositories.Sqlite
 {
     public interface IWhiskyRepository
     {
-        bool CreateEntry(Whisky whisky, SQLiteTransaction transaction);
+        bool CreateEntry(Whisky whisky);
 
         Whisky FindEntryById(string id);
 
-        bool UpdateEntryById(Whisky whisky, SQLiteTransaction transaction);
+        bool UpdateEntryById(string id, Whisky whisky);
 
-        bool DeleteEntryById(string id, SQLiteTransaction transaction);
+        bool DeleteEntryById(string id);
     }
 }
