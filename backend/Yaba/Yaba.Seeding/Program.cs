@@ -1,39 +1,49 @@
 ﻿using System;
 using System.Data.SQLite;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Yaba.Data;
+using Yaba.Data.Repositories;
+using Yaba.Data.Repositories.Sqlite;
+using Yaba.Domain.Models;
+using Yaba.Seeding;
 
-namespace Yaba.Seeding
+namespace Yaba.SeedingTool
 {
     class Program
     {
-
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
+            var dataDirectory = YabaPaths.ResolveDataDirectory(args.Length > 0 ? args[0] : null);
+            Directory.CreateDirectory(dataDirectory);
+            Directory.CreateDirectory(YabaPaths.GetContentRoot(dataDirectory));
 
-            using SQLiteConnection sqlite = new SQLiteConnection("Data Source=C:\\Dev\\Sqlite\\yaba.db;UseUTF16Encoding=False;");
-            sqlite.Open();
+            var databasePath = YabaPaths.GetDatabasePath(dataDirectory);
+            Console.WriteLine($"Database: {databasePath}");
+            Console.WriteLine($"Content:  {YabaPaths.GetContentRoot(dataDirectory)}");
 
-            // Create Whiskies Table
-            //string createTable = "CREATE TABLE Whiskies (Col1 VARCHAR(32), Col2 TEXT, Col3 INT, Col4 TEXT, Col5 INT, Col6 INT, Col7 TEXT, Col8 REAL, Col9 INT, Col10 INT, Col11 INT, Col12 TEXT)";
-            //var createTableCommand = sqlite.CreateCommand();
-            //createTableCommand.CommandText = createTable;
-            //createTableCommand.ExecuteNonQuery();
+            using var connection = new SQLiteConnection($"Data Source={databasePath};");
+            connection.Open();
 
-            // Insert first meaningfull row
-            var insertWhiskyCommand = sqlite.CreateCommand();
-            insertWhiskyCommand.CommandText = $"INSERT INTO Whiskies (Col1, Col2, Col3, Col4, Col5, Col6, Col7, Col8, Col9, Col10, Col11, Col12) " +
-                $"VALUES('{Guid.NewGuid().ToString("N")}', 'Arran 10', 1, 'Lochranza', 2022, 10, 'Ex-Bourbon and Ex-Sherry', 46.0, 70, 1, 1, '{DateTimeOffset.UtcNow}');";
-            insertWhiskyCommand.ExecuteNonQuery();
+            DatabaseSchema.EnsureCreated(connection);
 
-            // Read created row
-            var selectCommand = sqlite.CreateCommand();
-            selectCommand.CommandText = "SELECT * FROM Whiskies";
-            var dataReader = selectCommand.ExecuteReader();
-            while (dataReader.Read())
+            var whiskyRepository = new WhiskyRepository(connection);
+            var contentRepository = new ImageBlobsRepository(connection, YabaPaths.GetContentRoot(dataDirectory));
+
+            using var httpClient = new HttpClient
             {
-                string myreader = dataReader.GetString(0);
-                Console.WriteLine(myreader);
-            }
-            sqlite.Close();
+                Timeout = TimeSpan.FromMinutes(2)
+            };
+            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("YABA-Seeder/1.0");
+
+            await Kilkerran12Seed.SeedAsync(whiskyRepository, contentRepository, httpClient);
+
+            var whisky = whiskyRepository.FindEntryById(Kilkerran12Seed.WhiskyBaseId);
+            var images = contentRepository.GetImages(BeverageType.Whisky, Kilkerran12Seed.WhiskyBaseId);
+
+            Console.WriteLine($"Seeded {whisky.Name} ({whisky.Strength}% ABV, {whisky.Age}yo)");
+            Console.WriteLine($"Stored {images.Length} images for Whiskybase WID {Kilkerran12Seed.WhiskyBaseId}");
         }
     }
 }

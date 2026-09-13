@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YABA — Yet Another Booze App</title>
+    <link rel="stylesheet" href="/css/site.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.0-RC.6/bundles/datastar.js"></script>
+</head>
+<body>
+    <main id="main">
+        <header>
+            <h1>YABA</h1>
+            <p class="tagline">Yet Another Booze App — track your collection with Datastar</p>
+        </header>
+
+        <section class="panel">
+            <h2>SQLite collection</h2>
+            <p class="muted">Loaded from <code>backend/Yaba/data/yaba.db</code> via <code>WhiskyRepository</code>.</p>
+            <button data-on:click="@get('/bottles')">Load collection</button>
+            <p>
+                Featured bottle:
+                <a href="/whisky/192360.html">Kilkerran 12-year-old</a>
+            </p>
+            <div id="bottle-list">
+                <p class="muted">Click “Load collection” to fetch bottles from SQLite.</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -149,7 +149,7 @@ namespace Yaba.Data.Repositories
             command.Parameters.AddWithValue("@userId", image.UserId);
             command.Parameters.AddWithValue("@fileName", image.FileName);
             command.Parameters.AddWithValue("@sortOrder", image.SortOrder);
-            command.Parameters.AddWithValue("@created", image.Created);
+            command.Parameters.AddWithValue("@created", image.Created.ToString("o"));
 
             command.Prepare();
             command.ExecuteNonQuery();
@@ -178,7 +178,7 @@ namespace Yaba.Data.Repositories
                     UserId = reader.IsDBNull(3) ? null : reader.GetString(3),
                     FileName = reader.GetString(4),
                     SortOrder = reader.GetInt32(5),
-                    Created = reader.GetDateTime(6)
+                    Created = DateTimeOffset.Parse(reader.GetString(6))
                 });
             }
 

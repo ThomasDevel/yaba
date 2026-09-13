@@ -1,0 +1,250 @@
+:root {
+    color-scheme: light dark;
+    --bg: #1a1410;
+    --panel: #2a211a;
+    --text: #f5efe6;
+    --muted: #b8a894;
+    --accent: #c8860a;
+    --border: #4a3b2f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    background: linear-gradient(180deg, #120e0b 0%, var(--bg) 100%);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    letter-spacing: 0.08em;
+}
+
+.tagline {
+    color: var(--muted);
+    margin-top: 0.5rem;
+}
+
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.panel h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent);
+}
+
+.muted {
+    color: var(--muted);
+}
+
+button {
+    cursor: pointer;
+    background: var(--accent);
+    color: #1a1410;
+    border: none;
+    border-radius: 8px;
+    padding: 0.55rem 1rem;
+    font: inherit;
+    font-weight: 600;
+}
+
+button:hover {
+    filter: brightness(1.08);
+}
+
+.form-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+
+label {
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+}
+
+input {
+    padding: 0.55rem 0.65rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: #120e0b;
+    color: var(--text);
+    font: inherit;
+}
+
+.status {
+    min-height: 1.25rem;
+    color: var(--accent);
+}
+
+.bottle-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.bottle-table th,
+.bottle-table td {
+    text-align: left;
+    padding: 0.5rem 0.35rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.bottle-table th {
+    color: var(--muted);
+    font-weight: normal;
+    font-size: 0.85rem;
+}
+
+.signal-demo {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+#target {
+    margin-top: 0.75rem;
+}
+
+main:has(.whisky-detail) {
+    max-width: 960px;
+}
+
+.whisky-detail {
+    padding: 2rem 0 3rem;
+}
+
+.whisky-meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.whisky-meta a {
+    color: var(--accent);
+}
+
+.whisky-header h1 {
+    margin: 0.35rem 0 0;
+    font-size: 2.2rem;
+}
+
+.whisky-subtitle {
+    color: var(--muted);
+    margin-top: 0.35rem;
+}
+
+.whisky-layout {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    align-items: start;
+}
+
+@media (min-width: 760px) {
+    .whisky-layout {
+        grid-template-columns: 1.1fr 0.9fr;
+    }
+}
+
+.whisky-hero,
+.whisky-facts,
+.whisky-thumbs,
+.whisky-notes {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.whisky-hero {
+    margin: 0;
+    min-height: 100%;
+}
+
+.whisky-hero img {
+    width: 100%;
+    max-height: 420px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.whisky-thumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.whisky-thumb {
+    padding: 0;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 72px;
+    height: 72px;
+}
+
+.whisky-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.whisky-facts {
+    display: grid;
+    gap: 0.65rem;
+}
+
+.whisky-facts dt {
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.whisky-facts dd {
+    margin: 0.15rem 0 0;
+    font-size: 1rem;
+}
+
+.whisky-notes h2 {
+    margin-top: 0;
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+
+.bottle-table a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.bottle-table a:hover {
+    text-decoration: underline;
+}
+
+code {
+    font-family: Consolas, monospace;
+    font-size: 0.85em;
+    color: var(--muted);
+}

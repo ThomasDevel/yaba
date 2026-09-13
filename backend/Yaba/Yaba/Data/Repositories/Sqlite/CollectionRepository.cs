@@ -25,7 +25,7 @@ namespace Yaba.Data.Repositories.Sqlite
                 command.Parameters.AddWithValue("@userId", item.UserId);
                 command.Parameters.AddWithValue("@spiritType", item.SpiritType.ToString());
                 command.Parameters.AddWithValue("@spiritId", item.SpiritId);
-                command.Parameters.AddWithValue("@added", item.Added);
+                command.Parameters.AddWithValue("@added", item.Added.ToString("o"));
 
                 command.Prepare();
 
@@ -89,7 +89,7 @@ namespace Yaba.Data.Repositories.Sqlite
                     UserId = reader.GetString(0),
                     SpiritType = Enum.Parse<BeverageType>(reader.GetString(1), true),
                     SpiritId = reader.GetString(2),
-                    Added = reader.GetDateTime(3)
+                    Added = DateTimeOffset.Parse(reader.GetString(3))
                 });
             }
 

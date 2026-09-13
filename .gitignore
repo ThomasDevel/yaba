@@ -366,8 +366,9 @@ ASALocalRun/
 # Visual Studio History (VSHistory) files
 .vshistory/
 
-# BeatPulse healthcheck temp database
-healthchecksdb
+# SQLite database and downloaded bottle images
+backend/Yaba/data/
+
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
